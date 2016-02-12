@@ -14,8 +14,7 @@ public:
 };
 
 
-int main() 
-{
+int main() {
 	string input;
 
 	int x = 2;
@@ -108,39 +107,22 @@ int main()
 				cout << "You bash your head into a wall." << "\n\n";
 			}
 
+
 		} else {
 			cout << "I don't understand " << input << "\n";
 		}
 
-		if (input == "GO NORTH" && map[2][2].dieIfRetreat == true){
+		if (input == "NORTH" && x == 2 && y == 1){
 			map[2][1].description = "The demon that's been stalking you digs it's claws into your stomach. As you lose consciousness you see the door to your south laughing at you. You absolutely hate that door.";
 			map[2][1].canGoWest = false;
 			map[2][1].canGoSouth = false;
-
 		}
 
-		if (input == "NORTH" && map[2][2].dieIfRetreat == true){
-			map[2][1].description = "The demon that's been stalking you digs it's claws into your stomach. As you lose consciousness you see the door to your south laughing at you. You absolutely hate that door.";
-			map[2][1].canGoWest = false;
-			map[2][1].canGoSouth = false;
-
+		if (input == "EAST" && x == 2 && y == 2){
+			map[2][2].description = "You open the door and fall forever.";
+			map[2][2].canGoWest = false;
+			map[2][2].canGoEast = false;
 		}
-
-		if (input == "GO EAST" && map[1][2].dieIfRetreat == true){
-			map[1][2].description = "You open the door fall forever.";
-			map[1][2].canGoWest = false;
-			map[1][2].canGoEast = false;
-
-		}
-
-		if (input == "EAST" && map[1][2].dieIfRetreat == true){
-			map[1][2].description = "You open the door fall forever.";
-			map[1][2].canGoWest = false;
-			map[1][2].canGoEast = false;
-
-		}
-
-
 
 	}
 		// map[x][y] = 'O';
