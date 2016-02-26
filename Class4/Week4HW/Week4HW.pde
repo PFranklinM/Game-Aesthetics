@@ -48,6 +48,22 @@ void draw() {
   
   text("Score: " + score, 125, 400);
   
+  if(playerX >= 20){
+   playerX = 0; 
+  }
+  
+  if(playerX <= -1){
+   playerX = 19; 
+  }
+  
+  if(playerY >= 20){
+   playerY = 1; 
+  }
+  
+  if(playerY <= 0){
+   playerY = 19; 
+  }
+  
   for (int i=0; i < rows; i++) {
     for (int j=0; j < columns; j++) {
       
