@@ -12,8 +12,6 @@ var pistolDefaultAnimation;
 var worldMap = [
  //36X26
  
- //send data using OSC
- 
  //player start at 18,13 19,13 18,14 19,14
  
  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -64,6 +62,12 @@ var plane;
 var playerSpeed;
 var rotSpeed;
 var lastTime;
+
+
+ //https://www.npmjs.com/package/osc
+var oscPort = new osc.WebSocketPort({
+    url: "ws://localhost:8081" // URL to your Web Socket server. 
+});
 
 
 function preload() {
