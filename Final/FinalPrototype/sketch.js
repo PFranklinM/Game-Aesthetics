@@ -418,7 +418,7 @@ function raycastSprites() {
  
  for(var i = 0; i < sprites.length; i++){
   spriteCenterOrder[i] = i;
-  spriteCenterDistance[i] = (width/2 - sprites[i].pos.x);
+  spriteCenterDistance[i] = ((pos.x - sprites[i].pos.x) * (pos.x - sprites[i].pos.x) + (pos.y - sprites[i].pos.y) * (pos.y - sprites[i].pos.y));
  }
 
  var mappedOrder = spriteOrder.map(function(order, i) {
@@ -483,42 +483,41 @@ function raycastSprites() {
 
     if (gunShot === true && stripe >= width * 0.509 && stripe <= width * 0.52) {
 
-     console.log(spriteCenterOrder[i]);
-     // if(transformX > -1 && transformX < 1 && spriteOrder[0]){
+     if(spriteCenterOrder[i] === 0){
 
-     //   if(shotCounter >= 20){
-     //    score++;
-     //    // console.log("Score: " + score);
+       if(shotCounter >= 20){
+        score++;
+        // console.log("Score: " + score);
 
-     //    console.log("2 was hit");
+        console.log("2 was hit");
 
-     //    shotCounter = 0;
-     //   }
-     //  }
+        shotCounter = 0;
+       }
+      }
       
-     //  if(transformX - sprites[1].pos.x > -18 && transformX - sprites[1].pos.x < -15){
+      if(spriteCenterOrder[i] === 1){
 
-     //   if(shotCounter >= 20){
-     //    score++;
-     //    // console.log("Score: " + score);
+       if(shotCounter >= 20){
+        score++;
+        // console.log("Score: " + score);
 
-     //    console.log("3 was hit");
+        console.log("3 was hit");
 
-     //    shotCounter = 0;
-     //   }
-     //  }
+        shotCounter = 0;
+       }
+      }
       
-     //  if(transformX - sprites[2].pos.x > -18 && transformX - sprites[2].pos.x < -15){
+      if(spriteCenterOrder[i] === 2){
 
-     //   if(shotCounter >= 20){
-     //    score++;
-     //    // console.log("Score: " + score);
+       if(shotCounter >= 20){
+        score++;
+        // console.log("Score: " + score);
 
-     //    console.log("4 was hit");
+        console.log("4 was hit");
 
-     //    shotCounter = 0;
-     //   }
-     //  }
+        shotCounter = 0;
+       }
+      }
     }
     
     // console.log(transformX);
