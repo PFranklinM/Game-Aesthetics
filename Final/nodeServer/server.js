@@ -10,11 +10,20 @@ app.use(express.static(__dirname + '/'));//serve diectory this file is in
 console.log('Simple static server listening at '+url+':'+port);
 
 io.on('connection', function (socket) {
-    socket.on('new message', function (data) {
-        socket.emit('test message',{
-        	message: data
+    // socket.on('new message', function (data) {
+    //     socket.emit('test message',{
+    //     	message: data
+    //     });
+    // });
+
+
+    socket.on('playerPosition', function (data) {
+        socket.emit('playerPositionUpdated',{
+        	positionX: data,
+        	positionY: data
         });
     });
+
 });
 
 // Chatroom

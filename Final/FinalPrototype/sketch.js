@@ -251,6 +251,8 @@ function updatePlayer(dt) {
    pos.y += plane.y * playerSpeed * dt;
   }
  }
+ 
+ socket.emit('playerPosition', { positionX: pos.x, positionY: pos.y });
 
 }
 
@@ -552,7 +554,7 @@ function draw() {
  if (keyIsDown(32)) {
   gunShot = true;
   
-  socket.emit('new message');
+  // socket.emit('new message');
  }
 
  if (gunShot == true) {
@@ -563,6 +565,11 @@ function draw() {
  lastTime = millis();
 }
 
-socket.on('test message', function (data) {
-   console.log(pos.x);
- });
+socket.on('playerPositionUpdated', function (data) {
+ var position = data;
+ console.log(position);
+});
+
+// socket.on('test message', function (data) {
+//    console.log("test");
+//  });
