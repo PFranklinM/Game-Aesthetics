@@ -1,21 +1,18 @@
 // Setup basic express server
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
+var express = require("express");
+var app = express();//create instance of express
+var port = 3000;
+var url='localhost'
+var server = app.listen(port);
+var io = require("socket.io").listen(server);//socket io listen on port
 
-server.listen(port, function () {
-  console.log('Server listening at port %d', port);
-});
-
-// Routing
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/'));//serve diectory this file is in
+console.log('Simple static server listening at '+url+':'+port);
 
 io.on('connection', function (socket) {
     socket.on('new message', function (data) {
-        socket.broadcast.emit('new message', {
-            message: 'The message was sent'
+        socket.emit('test message',{
+        	message: data
         });
     });
 });

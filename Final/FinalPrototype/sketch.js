@@ -83,7 +83,12 @@ var lastTime;
 
 var gunCycleCompleted = false;
 
-var socket = io();
+var socket;
+var url ='149.31.200.132';
+var port = 3000;
+socket = io.connect(url+':'+port);//create instance of socket io
+
+// var socket = io();
 
 // var socket = io.connect('http://localhost:3000');
 
@@ -558,7 +563,6 @@ function draw() {
  lastTime = millis();
 }
 
-socket.on('new message', function () {
-   console.log(message);
-   console.log("test");
+socket.on('test message', function (data) {
+   console.log(pos.x);
  });
