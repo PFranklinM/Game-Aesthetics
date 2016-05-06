@@ -1,3 +1,5 @@
+//This is player 1
+
 var score = 0;
 
 var r;
@@ -81,26 +83,10 @@ var lastTime;
 
 var gunCycleCompleted = false;
 
-//https://www.npmjs.com/package/osc
- // var oscPort = new osc.WebSocketPort({
- //  url: "ws://localhost:3000/" // URL to your Web Socket server.
- // });
- 
- var oscPort = new osc.WebSocketPort({
-    url: "ws://localhost:3000/"
-});
+var socket = io();
 
-oscPort.open();
+// var socket = io.connect('http://localhost:3000');
 
-// oscPort.send({
-//      address: "149.31.197.139",
-//      //149.31.197.255
-//      args: pos.x
-//  });
- 
-  oscPort.on("message", function (oscMsg) {
-     console.log("An OSC message just arrived!", oscMsg);
- });
 
 function preload() {
 
@@ -161,9 +147,6 @@ function setup() {
   }
  }
  // console.log(worldMap);
- 
-
-
 }
 
 function drawMap() {
@@ -263,11 +246,6 @@ function updatePlayer(dt) {
    pos.y += plane.y * playerSpeed * dt;
   }
  }
-
- oscPort.send({
-    address: "/s_new",
-    args: ["default", 100]
-}, "149.31.197.139", 3001);
 
 }
 
@@ -568,6 +546,8 @@ function draw() {
 
  if (keyIsDown(32)) {
   gunShot = true;
+  
+  socket.emit('new message');
  }
 
  if (gunShot == true) {
@@ -577,3 +557,8 @@ function draw() {
 
  lastTime = millis();
 }
+
+socket.on('new message', function () {
+   console.log(message);
+   console.log("test");
+ });
