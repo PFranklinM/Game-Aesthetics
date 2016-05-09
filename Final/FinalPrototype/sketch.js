@@ -83,8 +83,10 @@ var lastTime;
 
 var gunCycleCompleted = false;
 
+var health;
+
 var socket;
-var url ='149.31.200.132';
+var url ='149.31.200.6';
 var port = 3000;
 socket = io.connect(url+':'+port);//create instance of socket io
 
@@ -119,6 +121,8 @@ function setup() {
  rot = 0;
  playerSpeed = 0.01;
  rotSpeed = 0.005;
+ 
+ health = 100;
 
  sprites = [{
   pos: createVector(17, 14)
@@ -417,11 +421,6 @@ function raycastSprites() {
   spriteOrder[i] = i;
   spriteDistance[i] = ((pos.x - sprites[i].pos.x) * (pos.x - sprites[i].pos.x) + (pos.y - sprites[i].pos.y) * (pos.y - sprites[i].pos.y));
  }
- 
- for(var i = 0; i < sprites.length; i++){
-  spriteCenterOrder[i] = i;
-  spriteCenterDistance[i] = ((pos.x - sprites[i].pos.x) * (pos.x - sprites[i].pos.x) + (pos.y - sprites[i].pos.y) * (pos.y - sprites[i].pos.y));
- }
 
  var mappedOrder = spriteOrder.map(function(order, i) {
   return {
@@ -430,21 +429,9 @@ function raycastSprites() {
   };
  });
  mappedOrder.sort(compareSprites);
- 
- var mappedCenterOrder = spriteCenterOrder.map(function(order, i) {
-  return {
-   index: i,
-   value: spriteCenterDistance[i]
-  };
- });
- mappedCenterOrder.sort(compareSprites);
 
  for (var i = 0; i < mappedOrder.length; i++) {
   spriteOrder[i] = mappedOrder[i].index;
- }
- 
- for (var i = 0; i < mappedCenterOrder.length; i++) {
-  spriteCenterOrder[i] = mappedCenterOrder[i].index;
  }
 
  for (var i = 0; i < sprites.length; i++) {
@@ -484,8 +471,8 @@ function raycastSprites() {
    if (transformY > 0 && stripe > 0 && stripe < width && transformY < zBuffer[stripe]) {
 
     if (gunShot === true && stripe >= width * 0.509 && stripe <= width * 0.52) {
-
-     if(spriteCenterOrder[i] === 0){
+     
+     if(spriteOrder[i] === 0){
 
        if(shotCounter >= 20){
         score++;
@@ -497,7 +484,7 @@ function raycastSprites() {
        }
       }
       
-      if(spriteCenterOrder[i] === 1){
+      if(spriteOrder[i] === 1){
 
        if(shotCounter >= 20){
         score++;
@@ -509,7 +496,7 @@ function raycastSprites() {
        }
       }
       
-      if(spriteCenterOrder[i] === 2){
+      if(spriteOrder[i] === 2){
 
        if(shotCounter >= 20){
         score++;
@@ -525,7 +512,7 @@ function raycastSprites() {
     // console.log(transformX);
     // console.log(spriteScreenX);
 
-    stroke(spriteOrder[i] * 50);
+    stroke(spriteOrder[i] * 100);
     line(stripe, drawStartY, stripe, drawEndY);
    }
   }
@@ -550,6 +537,10 @@ function draw() {
  drawSprite(p2StandingAnimation);
 
  drawSprite(pistolDefaultAnimation);
+ 
+ textSize(40);
+ text("Health: " + health, 10, 50);
+ fill(0, 102, 153);
 
  if (keyIsDown(32)) {
   gunShot = true;
@@ -567,7 +558,7 @@ function draw() {
 
 socket.on('playerPositionUpdated', function (data) {
  var position = data;
- console.log(position);
+ // console.log(position);
 });
 
 // socket.on('test message', function (data) {
