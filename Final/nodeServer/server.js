@@ -78,4 +78,32 @@ var worldMapVar = {};
     	});
     });
 
+
+    socket.on('player1WasShot', function (data10) {
+        io.sockets.emit('player1Hurt',{
+        	player1ShotBool: data10
+        });
+    });
+
+
+    socket.on('player2WasShot', function (data11) {
+        io.sockets.emit('player2Hurt',{
+        	player2ShotBool: data11
+        });
+    });
+
+
+    socket.on('player3WasShot', function (data12) {
+        io.sockets.emit('player3Hurt',{
+        	player3ShotBool: data12
+        });
+    });
+
+
+    socket.on('player4WasShot', function (data13) {
+        io.sockets.emit('player4Hurt',{
+        	player4ShotBool: data13
+        });
+    });
+
 });

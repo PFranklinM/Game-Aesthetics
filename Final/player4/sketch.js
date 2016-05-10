@@ -1,7 +1,5 @@
 //This is player 4
 
-var score = 0;
-
 var r;
 
 var shotCounter = 0;
@@ -84,6 +82,11 @@ var lastTime;
 var gunCycleCompleted = false;
 
 var health;
+var oneGotShot;
+var twoGotShot;
+var threeGotShot;
+var fourGotShot;
+var killsNum;
 
 var socket;
 // var url = '149.31.200.6';
@@ -124,6 +127,11 @@ function setup() {
  rotSpeed = 0.005;
  
  health = 100;
+ oneGotShot = false;
+ twoGotShot = false;
+ threeGotShot = false;
+ fourGotShot = false;
+ killsNum = 0;
 
  sprites = [{
   //player1
@@ -333,7 +341,6 @@ function raycast() {
 
    // if (worldMap[mapX][mapY] === 11) {
    //  if (gunShot === true && x >= width * 0.47 && x <= width * 0.52) {
-   //   score++;
    //  }
    //  hit = 2;
    // }
@@ -472,10 +479,12 @@ function raycastSprites() {
      if(spriteOrder[i] === 0){
 
        if(shotCounter >= 20){
-        score++;
-        // console.log("Score: " + score);
 
-        console.log("2 was hit");
+        console.log("1 was hit");
+        
+        oneGotShot = true;
+        
+        socket.emit('player1WasShot', { player1ShotBool: oneGotShot });
 
         shotCounter = 0;
        }
@@ -484,10 +493,12 @@ function raycastSprites() {
       if(spriteOrder[i] === 1){
 
        if(shotCounter >= 20){
-        score++;
-        // console.log("Score: " + score);
 
-        console.log("3 was hit");
+        console.log("2 was hit");
+        
+        twoGotShot = true;
+        
+        socket.emit('player2WasShot', { player2ShotBool: twoGotShot });
 
         shotCounter = 0;
        }
@@ -496,10 +507,12 @@ function raycastSprites() {
       if(spriteOrder[i] === 2){
 
        if(shotCounter >= 20){
-        score++;
-        // console.log("Score: " + score);
 
-        console.log("4 was hit");
+        console.log("3 was hit");
+        
+        threeGotShot = true;
+        
+        socket.emit('player3WasShot', { player3ShotBool: threeGotShot });
 
         shotCounter = 0;
        }
@@ -536,7 +549,8 @@ function draw() {
  drawSprite(pistolDefaultAnimation);
  
  textSize(40);
- text("Health: " + health, 10, 50);
+ text("Health: " + health, width*0.05, 50);
+ text("Kills: " + killsNum, width*0.8, 50);
  fill(0, 102, 153);
 
  if (keyIsDown(32)) {
@@ -551,6 +565,12 @@ function draw() {
  }
 
  lastTime = millis();
+ 
+ if(threeGotShot === true){
+  fill(255, 0, 0);
+  rect(0, 0, width, height);
+ }
+ 
 }
 
 
@@ -672,6 +692,63 @@ socket.on('worldMapDataUpdated', function (data9) {
         
         worldMap = worldMapVar[key];
         // console.log(worldMapVar[key]);
+    }
+ }
+});
+
+socket.on('player1Hurt', function (data10) {
+ 
+  for(key in data10) {
+    if(data10.hasOwnProperty(key)) {
+        var player1ShotBool = data10[key];
+        
+        oneGotShot = player1ShotBool[key];
+        // console.log(player1ShotBool[key]);
+        oneGotShot = false;
+    }
+ }
+});
+
+socket.on('player2Hurt', function (data11) {
+ 
+  for(key in data11) {
+    if(data11.hasOwnProperty(key)) {
+        var player2ShotBool = data11[key];
+        
+        twoGotShot = player2ShotBool[key];
+        // console.log(player2ShotBool[key]);
+        twoGotShot = false;
+    }
+ }
+});
+
+socket.on('player3Hurt', function (data12) {
+ 
+  for(key in data12) {
+    if(data12.hasOwnProperty(key)) {
+        var player3ShotBool = data12[key];
+        
+        threeGotShot = player3ShotBool[key];
+        // console.log(player3ShotBool[key]);
+        threeGotShot = false;
+    }
+ }
+});
+
+socket.on('player4Hurt', function (data13) {
+ 
+  for(key in data13) {
+    if(data13.hasOwnProperty(key)) {
+        var player4ShotBool = data13[key];
+        
+        fourGotShot = player4ShotBool[key];
+        // console.log(player4ShotBool[key]);
+        
+         if(fourGotShot === true){
+         health -= 10;
+        }
+        
+        fourGotShot = false;
     }
  }
 });
