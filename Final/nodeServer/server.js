@@ -11,67 +11,69 @@ console.log('Simple static server listening at '+url+':'+port);
 
 io.on('connection', function (socket) {
 
-    // socket.on('new message', function (data) {
-    //     socket.emit('test message',{
-    //     	message: data
-    //     });
-    // });
+    socket.on('new message', function (data) {
+        socket.broadcast.emit('test message',{
+        	message: data
+        });
+    });
 
 
     socket.on('player1XPosition', function (data1) {
-        socket.emit('player1XPositionUpdated',{
+        socket.broadcast.emit('player1XPositionUpdated',{
         	position1X: data1
         });
     });
 
     socket.on('player1YPosition', function (data2) {
-        socket.emit('player1YPositionUpdated',{
+        socket.broadcast.emit('player1YPositionUpdated',{
         	position1Y: data2
         });
     });
 
 
     socket.on('player2XPosition', function (data3) {
-        socket.emit('player2XPositionUpdated',{
+        socket.broadcast.emit('player2XPositionUpdated',{
         	position2X: data3
         });
     });
 
     socket.on('player2YPosition', function (data4) {
-        socket.emit('player2YPositionUpdated',{
+        socket.broadcast.emit('player2YPositionUpdated',{
         	position2Y: data4
         });
     });
 
 
     socket.on('player3XPosition', function (data5) {
-        socket.emit('player3XPositionUpdated',{
+        socket.broadcast.emit('player3XPositionUpdated',{
         	position3X: data5
         });
     });
 
     socket.on('player3YPosition', function (data6) {
-        socket.emit('player3YPositionUpdated',{
+        socket.broadcast.emit('player3YPositionUpdated',{
         	position3Y: data6
         });
     });
 
 
     socket.on('player4XPosition', function (data7) {
-        socket.emit('player4XPositionUpdated',{
+        socket.broadcast.emit('player4XPositionUpdated',{
         	position4X: data7
         });
     });
 
     socket.on('player4YPosition', function (data8) {
-        socket.emit('player4YPositionUpdated',{
+        socket.broadcast.emit('player4YPositionUpdated',{
         	position4Y: data8
         });
     });
 
 
+var worldMapVar = {}; 
+
     socket.on('worldMapData', function (data9) {
-    	socket.emit('worldMapDataUpdated',{
+    	socket.broadcast.emit('worldMapDataUpdated',{
     		worldMapVar: data9
     	});
     });

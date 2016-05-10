@@ -126,13 +126,16 @@ function setup() {
  health = 100;
 
  sprites = [{
+  //player1
   pos: createVector(17, 12)
  
   
  }, {
-  pos: createVector(17, 15)
- }, {
+  //player3
   pos: createVector(20, 12)
+ }, {
+  //player4
+  pos: createVector(17, 15)
  }];
 
  spritesDir = [{
@@ -551,60 +554,126 @@ function draw() {
 }
 
 socket.on('player1XPositionUpdated', function (data1) {
- var position1X = data1;
- // console.log(position1X);
+ 
+ for(key in data1) {
+    if(data1.hasOwnProperty(key)) {
+        var position1X = data1[key];
+        
+        sprites[0].pos.x = position1X[key];
+        // console.log(position1X[key]);
+        
+    }
+ }
 });
 
 socket.on('player1YPositionUpdated', function (data2) {
- var position1Y = data2;
- // console.log(position1Y);
+ 
+ for(key in data2) {
+    if(data2.hasOwnProperty(key)) {
+        var position1Y = data2[key];
+        
+        sprites[0].pos.y = position1Y[key];
+        // console.log(position1Y[key]);
+        
+    }
+ }
 });
 
 
 socket.on('player2XPositionUpdated', function (data3) {
- var position2X = data3;
- // console.log(position2X);
+ 
+ // for(key in data3) {
+ //    if(data3.hasOwnProperty(key)) {
+ //        var position2X = data3[key];
+        
+ //        sprites[0].pos.x = position2X[key];
+ //        // console.log(position2X[key]);
+        
+ //    }
+ // }
 });
 
 socket.on('player2YPositionUpdated', function (data4) {
- var position2Y = data4;
- // console.log(position2Y);
+ 
+ // for(key in data4) {
+ //    if(data4.hasOwnProperty(key)) {
+ //        var position2Y = data4[key];
+        
+ //        sprites[0].pos.y = position2Y[key];
+ //        // console.log(position2Y[key]);
+        
+ //    }
+ // }
 });
 
 
 socket.on('player3XPositionUpdated', function (data5) {
- var position3X = data5;
- // console.log(position3X);
+ 
+ for(key in data5) {
+    if(data5.hasOwnProperty(key)) {
+        var position3X = data5[key];
+        
+        sprites[1].pos.x = position3X[key];
+        // console.log(position3X[key]);
+        
+    }
+ }
 });
 
 socket.on('player3YPositionUpdated', function (data6) {
- var position3Y = data6;
- // console.log(position3Y);
+ 
+ for(key in data6) {
+    if(data6.hasOwnProperty(key)) {
+        var position3Y = data6[key];
+        
+        sprites[1].pos.y = position3Y[key];
+        // console.log(position3Y[key]);
+        
+    }
+ }
 });
 
 
 socket.on('player4XPositionUpdated', function (data7) {
- var position4X = data7;
- // console.log(position4X);
+
+ for(key in data7) {
+    if(data7.hasOwnProperty(key)) {
+        var position4X = data7[key];
+        
+        sprites[2].pos.x = position4X[key];
+        // console.log(position4X[key]);
+        
+    }
+ }
 });
 
 socket.on('player4YPositionUpdated', function (data8) {
- var position4Y = data8;
- // console.log(position4Y);
-});
  
-socket.on('worldMapDataUpdated', function (data9) {
- var worldMapVar = {data9};
- 
- for (var i = 0; i < worldMap.length; i++) {
-  for (var j = 0; j < worldMap[0].length; j++) {
-   if (worldMap[i][j] === r) {
-    worldMap[i][j] = worldMapVar;
-   }
-  }
+  for(key in data8) {
+    if(data8.hasOwnProperty(key)) {
+        var position4Y = data8[key];
+        
+        sprites[2].pos.y = position4Y[key];
+        // console.log(position4Y[key]);
+        
+    }
  }
- // console.log(worldMap);
 });
+
+// socket.on('worldMapDataUpdated', function (data9) {
+//  var worldMapVar = [];
+ 
+//  worldMapVar.push(data9);
+ 
+//  for (var i = 0; i < worldMap.length; i++) {
+//   for (var j = 0; j < worldMap[0].length; j++) {
+//    if (worldMap[i][j] === r) {
+//     worldMap[i][j] = worldMapVar;
+//    }
+//   }
+//  }
+//  // console.log(worldMap);
+// });
 
 // socket.on('test message', function (data) {
 //    console.log("test");
