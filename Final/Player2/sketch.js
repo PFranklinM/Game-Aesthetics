@@ -602,8 +602,9 @@ function draw() {
  
  showDamage = false;
  
+ socket.emit('player2Health', { player2HealthData: health });
+ 
  if(health <= 0){
-  socket.emit('player2Health', { player2HealthData: health });
   p2Health = 100;
   health = 100;
   pos.set(20, 15);
