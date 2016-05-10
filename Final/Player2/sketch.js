@@ -88,6 +88,14 @@ var threeGotShot;
 var fourGotShot;
 var killsNum;
 
+var showDamage = false;
+var gotAKill = false;
+
+var p1Health = 100;
+var p2Health = 100;
+var p3Health = 100;
+var p4Health = 100;
+
 var socket;
 // var url = '149.31.200.6';
 var url = '192.168.0.5';
@@ -566,9 +574,21 @@ function draw() {
 
  lastTime = millis();
  
- if(twoGotShot === true){
+ if(gotAKill === true){
+  killsNum ++;
+ }
+ 
+ gotAKill = false;
+ 
+ if(showDamage === true){
   fill(255, 0, 0);
   rect(0, 0, width, height);
+ }
+ 
+ showDamage = false;
+ 
+ if(health <= 0){
+  socket.emit('player2Health', { player2HealthData: health });
  }
  
 }
@@ -719,6 +739,7 @@ socket.on('player2Hurt', function (data11) {
         
         if(twoGotShot === true){
          health -= 10;
+         showDamage = true;
         }
         
         twoGotShot = false;
@@ -748,6 +769,54 @@ socket.on('player4Hurt', function (data13) {
         fourGotShot = player4ShotBool[key];
         // console.log(player4ShotBool[key]);
         fourGotShot = false;
+    }
+ }
+});
+
+socket.on('player1LifeBar', function (data14) {
+ 
+  for(key in data14) {
+    if(data14.hasOwnProperty(key)) {
+        var player1HealthData = data14[key];
+        
+        p1Health = player1HealthData[key];
+        // console.log(player1HealthData[key]);
+    }
+ }
+});
+
+socket.on('player2LifeBar', function (data15) {
+ 
+  for(key in data15) {
+    if(data15.hasOwnProperty(key)) {
+        var player2HealthData = data15[key];
+        
+        p2Health = player2HealthData[key];
+        // console.log(player2HealthData[key]);
+    }
+ }
+});
+
+socket.on('player3LifeBar', function (data16) {
+ 
+  for(key in data16) {
+    if(data16.hasOwnProperty(key)) {
+        var player3HealthData = data16[key];
+        
+        p3Health = player3HealthData[key];
+        // console.log(player3HealthData[key]);
+    }
+ }
+});
+
+socket.on('player4LifeBar', function (data17) {
+ 
+  for(key in data17) {
+    if(data17.hasOwnProperty(key)) {
+        var player4HealthData = data17[key];
+        
+        p4Health = player4HealthData[key];
+        // console.log(player4HealthData[key]);
     }
  }
 });

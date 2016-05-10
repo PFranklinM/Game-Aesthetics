@@ -106,4 +106,28 @@ var worldMapVar = {};
         });
     });
 
+    socket.on('player1Health', function (data14) {
+        io.sockets.emit('player1LifeBar',{
+        	player1HealthData: data14
+        });
+    });
+
+    socket.on('player2Health', function (data15) {
+        io.sockets.emit('player2LifeBar',{
+        	player2HealthData: data15
+        });
+    });
+
+    socket.on('player3Health', function (data16) {
+        io.sockets.emit('player3LifeBar',{
+        	player3HealthData: data16
+        });
+    });
+
+    socket.on('player4Health', function (data17) {
+        io.sockets.emit('player4LifeBar',{
+        	player4HealthData: data17
+        });
+    });
+
 });
