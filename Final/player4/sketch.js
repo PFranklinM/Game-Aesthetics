@@ -1,4 +1,4 @@
-//This is player 1
+//This is player 4
 
 var score = 0;
 
@@ -116,7 +116,7 @@ function preload() {
 function setup() {
  createCanvas(800, 600);
 
- pos = createVector(17, 12);
+ pos = createVector(20, 12);
  dir = createVector(0, 1);
  plane = createVector(1, 0);
  rot = 0;
@@ -132,7 +132,7 @@ function setup() {
  }, {
   pos: createVector(17, 15)
  }, {
-  pos: createVector(20, 12)
+  pos: createVector(17, 12)
  }];
 
  spritesDir = [{
@@ -257,8 +257,8 @@ function updatePlayer(dt) {
   }
  }
  
- socket.emit('player1XPosition', { position1X: pos.x });
- socket.emit('player1YPosition', { position1Y: pos.y });
+ socket.emit('player4XPosition', { position4X: pos.x });
+ socket.emit('player4YPosition', { position4Y: pos.y });
 
 }
 
