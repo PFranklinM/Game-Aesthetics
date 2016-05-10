@@ -16,7 +16,7 @@ var pistolAnimation;
 var pistolDefaultAnimation;
 
 var worldMap = [
- //36X26
+//  //36X26
 
  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
  [1, 0, 0, 0, 0, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 0, 0, 0, 0, 1],
@@ -149,14 +149,19 @@ function setup() {
 
  currentAnimation = pistolAnimation.getAnimationLabel();
 
- for (var i = 0; i < worldMap.length; i++) {
-  for (var j = 0; j < worldMap[0].length; j++) {
-   if (worldMap[i][j] === r) {
-    worldMap[i][j] = Math.floor(Math.random() * 10);
-   }
-  }
- }
+ // for (var i = 0; i < worldMap.length; i++) {
+ //  for (var j = 0; j < worldMap[0].length; j++) {
+ //   if (worldMap[i][j] === r) {
+ //    worldMap[i][j] = Math.floor(Math.random() * 10);
+ //   }
+ //  }
+ // }
  // console.log(worldMap);
+ 
+ socket.on('worldMapDataUpdated', function (data) {
+ worldMap = data;
+ });
+
 }
 
 function drawMap() {

@@ -149,14 +149,19 @@ function setup() {
 
  currentAnimation = pistolAnimation.getAnimationLabel();
 
- for (var i = 0; i < worldMap.length; i++) {
-  for (var j = 0; j < worldMap[0].length; j++) {
-   if (worldMap[i][j] === r) {
-    worldMap[i][j] = Math.floor(Math.random() * 10);
-   }
-  }
- }
+ // for (var i = 0; i < worldMap.length; i++) {
+ //  for (var j = 0; j < worldMap[0].length; j++) {
+ //   if (worldMap[i][j] === r) {
+ //    worldMap[i][j] = Math.floor(Math.random() * 10);
+ //   }
+ //  }
+ // }
  // console.log(worldMap);
+ 
+ socket.on('worldMapDataUpdated', function (data) {
+ worldMap = data;
+ });
+ 
 }
 
 function drawMap() {

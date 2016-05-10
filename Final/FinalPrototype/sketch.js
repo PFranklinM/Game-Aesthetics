@@ -157,6 +157,9 @@ function setup() {
   }
  }
  // console.log(worldMap);
+ 
+ socket.emit('worldMapData', { worldMapVar: worldMap });
+ 
 }
 
 function drawMap() {

@@ -69,4 +69,11 @@ io.on('connection', function (socket) {
         });
     });
 
+
+    socket.on('worldMapData', function (data) {
+    	socket.emit('worldMapDataUpdated',{
+    		worldMapVar: data
+    	});
+    });
+
 });
