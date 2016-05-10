@@ -661,20 +661,20 @@ socket.on('player4YPositionUpdated', function (data8) {
  }
 });
 
-// socket.on('worldMapDataUpdated', function (data9) {
-//  var worldMapVar = [];
+socket.on('worldMapDataUpdated', function (data9) {
+ var worldMapVar = [];
  
-//  worldMapVar.push(data9);
+ worldMapVar.push(data9);
  
-//  for (var i = 0; i < worldMap.length; i++) {
-//   for (var j = 0; j < worldMap[0].length; j++) {
-//    if (worldMap[i][j] === r) {
-//     worldMap[i][j] = worldMapVar;
-//    }
-//   }
-//  }
-//  // console.log(worldMap);
-// });
+ for(key in data9) {
+    if(data9.hasOwnProperty(key)) {
+        worldMapVar = data9[key];
+        
+        worldMap = worldMapVar[key];
+        // console.log(worldMapVar[key]);
+    }
+ }
+});
 
 // socket.on('test message', function (data) {
 //    console.log("test");

@@ -161,6 +161,8 @@ function setup() {
  }
  // console.log(worldMap);
  
+ socket.emit('worldMapData', { worldMapVar: worldMap });
+ 
 }
 
 function drawMap() {
@@ -574,27 +576,37 @@ function draw() {
   drawSprite(pistolAnimation);
   shotCounter++;
  }
- 
- for (var i = 0; i < worldMap.length; i++) {
-  for (var j = 0; j < worldMap[0].length; j++) {
     
-   socket.emit('worldMapData', { worldMapVar: worldMap[i][j] });
-    
-  }
- }
+ // socket.emit('worldMapData', { worldMapVar: worldMap });
 
  lastTime = millis();
 }
 
 
 socket.on('player1XPositionUpdated', function (data1) {
- // var position1X = data1;
- // console.log(position1X);
+ 
+ for(key in data1) {
+    if(data1.hasOwnProperty(key)) {
+        var position1X = data1[key];
+        
+        // sprites[0].pos.x = position2X[key];
+        // console.log(position1X[key]);
+        
+    }
+ }
 });
 
 socket.on('player1YPositionUpdated', function (data2) {
- // var position1Y = data2;
- // console.log(position1Y);
+ 
+ for(key in data2) {
+    if(data2.hasOwnProperty(key)) {
+        var position1Y = data2[key];
+        
+        // sprites[0].pos.x = position2X[key];
+        // console.log(position1Y[key]);
+        
+    }
+ }
 });
 
 
@@ -683,14 +695,14 @@ socket.on('player4YPositionUpdated', function (data8) {
  
 //  worldMapVar.push(data9);
  
-//  for (var i = 0; i < worldMap.length; i++) {
-//   for (var j = 0; j < worldMap[0].length; j++) {
-//    if (worldMap[i][j] === r) {
-//     worldMap[i][j] = worldMapVar;
-//    }
-//   }
+//  for(key in data9) {
+//     if(data9.hasOwnProperty(key)) {
+//         worldMapVar = data9[key];
+        
+//         worldMap = worldMapVar[key];
+//         console.log(worldMapVar[key]);
+//     }
 //  }
-//  // console.log(worldMap);
 // });
 
 // socket.on('test message', function (data) {

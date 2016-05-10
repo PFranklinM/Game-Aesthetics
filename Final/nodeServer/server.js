@@ -12,59 +12,59 @@ console.log('Simple static server listening at '+url+':'+port);
 io.on('connection', function (socket) {
 
     socket.on('new message', function (data) {
-        socket.broadcast.emit('test message',{
+        io.sockets.emit('test message',{
         	message: data
         });
     });
 
 
     socket.on('player1XPosition', function (data1) {
-        socket.broadcast.emit('player1XPositionUpdated',{
+        io.sockets.emit('player1XPositionUpdated',{
         	position1X: data1
         });
     });
 
     socket.on('player1YPosition', function (data2) {
-        socket.broadcast.emit('player1YPositionUpdated',{
+        io.sockets.emit('player1YPositionUpdated',{
         	position1Y: data2
         });
     });
 
 
     socket.on('player2XPosition', function (data3) {
-        socket.broadcast.emit('player2XPositionUpdated',{
+        io.sockets.emit('player2XPositionUpdated',{
         	position2X: data3
         });
     });
 
     socket.on('player2YPosition', function (data4) {
-        socket.broadcast.emit('player2YPositionUpdated',{
+        io.sockets.emit('player2YPositionUpdated',{
         	position2Y: data4
         });
     });
 
 
     socket.on('player3XPosition', function (data5) {
-        socket.broadcast.emit('player3XPositionUpdated',{
+        io.sockets.emit('player3XPositionUpdated',{
         	position3X: data5
         });
     });
 
     socket.on('player3YPosition', function (data6) {
-        socket.broadcast.emit('player3YPositionUpdated',{
+        io.sockets.emit('player3YPositionUpdated',{
         	position3Y: data6
         });
     });
 
 
     socket.on('player4XPosition', function (data7) {
-        socket.broadcast.emit('player4XPositionUpdated',{
+        io.sockets.emit('player4XPositionUpdated',{
         	position4X: data7
         });
     });
 
     socket.on('player4YPosition', function (data8) {
-        socket.broadcast.emit('player4YPositionUpdated',{
+        io.sockets.emit('player4YPositionUpdated',{
         	position4Y: data8
         });
     });
@@ -73,7 +73,7 @@ io.on('connection', function (socket) {
 var worldMapVar = {}; 
 
     socket.on('worldMapData', function (data9) {
-    	socket.broadcast.emit('worldMapDataUpdated',{
+    	io.sockets.emit('worldMapDataUpdated',{
     		worldMapVar: data9
     	});
     });
