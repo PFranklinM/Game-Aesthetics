@@ -10,6 +10,7 @@ app.use(express.static(__dirname + '/'));//serve diectory this file is in
 console.log('Simple static server listening at '+url+':'+port);
 
 io.on('connection', function (socket) {
+
     // socket.on('new message', function (data) {
     //     socket.emit('test message',{
     //     	message: data
@@ -17,73 +18,55 @@ io.on('connection', function (socket) {
     // });
 
 
-    socket.on('playerPosition', function (data) {
-        socket.emit('playerPositionUpdated',{
-        	positionX: data,
-        	positionY: data
+    socket.on('player1XPosition', function (data) {
+        socket.emit('player1XPositionUpdated',{
+        	position1X: data
+        });
+    });
+
+    socket.on('player1YPosition', function (data) {
+        socket.emit('player1YPositionUpdated',{
+        	position1Y: data
+        });
+    });
+
+
+    socket.on('player2XPosition', function (data) {
+        socket.emit('player2XPositionUpdated',{
+        	position2X: data
+        });
+    });
+
+    socket.on('player2YPosition', function (data) {
+        socket.emit('player2YPositionUpdated',{
+        	position2Y: data
+        });
+    });
+
+
+    socket.on('player3XPosition', function (data) {
+        socket.emit('player3XPositionUpdated',{
+        	position3X: data
+        });
+    });
+
+    socket.on('player3YPosition', function (data) {
+        socket.emit('player3YPositionUpdated',{
+        	position3Y: data
+        });
+    });
+
+
+    socket.on('player4XPosition', function (data) {
+        socket.emit('player4XPositionUpdated',{
+        	position4X: data
+        });
+    });
+
+    socket.on('player4YPosition', function (data) {
+        socket.emit('player4YPositionUpdated',{
+        	position4Y: data
         });
     });
 
 });
-
-// Chatroom
-
-// var numUsers = 0;
-
-// io.on('connection', function (socket) {
-//   var addedUser = false;
-
-//   // when the client emits 'new message', this listens and executes
-//   socket.on('new message', function (data) {
-//     // we tell the client to execute 'new message'
-//     socket.broadcast.emit('new message', {
-//       username: socket.username,
-//       message: data
-//     });
-//   });
-
-//   // when the client emits 'add user', this listens and executes
-//   socket.on('add user', function (username) {
-//     if (addedUser) return;
-
-//     // we store the username in the socket session for this client
-//     socket.username = username;
-//     ++numUsers;
-//     addedUser = true;
-//     socket.emit('login', {
-//       numUsers: numUsers
-//     });
-//     // echo globally (all clients) that a person has connected
-//     socket.broadcast.emit('user joined', {
-//       username: socket.username,
-//       numUsers: numUsers
-//     });
-//   });
-
-//   // when the client emits 'typing', we broadcast it to others
-//   socket.on('typing', function () {
-//     socket.broadcast.emit('typing', {
-//       username: socket.username
-//     });
-//   });
-
-//   // when the client emits 'stop typing', we broadcast it to others
-//   socket.on('stop typing', function () {
-//     socket.broadcast.emit('stop typing', {
-//       username: socket.username
-//     });
-//   });
-
-//   // when the user disconnects.. perform this
-//   socket.on('disconnect', function () {
-//     if (addedUser) {
-//       --numUsers;
-
-//       // echo globally that this client has left
-//       socket.broadcast.emit('user left', {
-//         username: socket.username,
-//         numUsers: numUsers
-//       });
-//     }
-//   });
-// });

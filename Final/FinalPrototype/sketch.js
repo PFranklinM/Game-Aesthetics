@@ -1,4 +1,4 @@
-//This is player 1
+//This is player 4
 
 var score = 0;
 
@@ -19,10 +19,10 @@ var worldMap = [
  //36X26
 
  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
- [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
- [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
- [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
- [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
+ [1, 0, 0, 0, 0, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 0, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 0, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 0, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 0, 0, 0, 0, 1],
  [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
  [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
  [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
@@ -49,10 +49,10 @@ var worldMap = [
  [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
  [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
  [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
- [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
- [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
- [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
- [1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 1],
+ [1, 0, 0, 0, 0, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 0, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 0, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 0, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, 0, 0, 0, 0, 1],
  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
@@ -86,7 +86,8 @@ var gunCycleCompleted = false;
 var health;
 
 var socket;
-var url ='149.31.200.6';
+// var url = '149.31.200.6';
+var url = '192.168.0.5';
 var port = 3000;
 socket = io.connect(url+':'+port);//create instance of socket io
 
@@ -115,7 +116,7 @@ function preload() {
 function setup() {
  createCanvas(800, 600);
 
- pos = createVector(18, 13);
+ pos = createVector(17, 15);
  dir = createVector(0, 1);
  plane = createVector(1, 0);
  rot = 0;
@@ -125,13 +126,13 @@ function setup() {
  health = 100;
 
  sprites = [{
-  pos: createVector(17, 14)
+  pos: createVector(20, 12)
  
   
  }, {
-  pos: createVector(17, 12)
+  pos: createVector(20, 15)
  }, {
-  pos: createVector(19, 12)
+  pos: createVector(17, 12)
  }];
 
  spritesDir = [{
@@ -256,7 +257,8 @@ function updatePlayer(dt) {
   }
  }
  
- socket.emit('playerPosition', { positionX: pos.x, positionY: pos.y });
+ socket.emit('player4XPosition', { position4X: pos.x });
+ socket.emit('player4YPosition', { position4Y: pos.y });
 
 }
 
@@ -556,9 +558,48 @@ function draw() {
  lastTime = millis();
 }
 
-socket.on('playerPositionUpdated', function (data) {
- var position = data;
- // console.log(position);
+
+socket.on('player1XPositionUpdated', function (data) {
+ var position1X = data;
+ console.log(position1X);
+});
+
+socket.on('player1YPositionUpdated', function (data) {
+ var position1Y = data;
+ console.log(position1Y);
+});
+
+
+socket.on('player2XPositionUpdated', function (data) {
+ var position2X = data;
+ console.log(position2X);
+});
+
+socket.on('player2YPositionUpdated', function (data) {
+ var position2Y = data;
+ console.log(position2Y);
+});
+
+
+socket.on('player3XPositionUpdated', function (data) {
+ var position3X = data;
+ console.log(position3X);
+});
+
+socket.on('player3YPositionUpdated', function (data) {
+ var position3Y = data;
+ console.log(position3Y);
+});
+
+
+socket.on('player4XPositionUpdated', function (data) {
+ var position4X = data;
+ console.log(position4X);
+});
+
+socket.on('player4YPositionUpdated', function (data) {
+ var position4Y = data;
+ console.log(position4Y);
 });
 
 // socket.on('test message', function (data) {
