@@ -148,19 +148,6 @@ function setup() {
  gunShot = false;
 
  currentAnimation = pistolAnimation.getAnimationLabel();
-
- // for (var i = 0; i < worldMap.length; i++) {
- //  for (var j = 0; j < worldMap[0].length; j++) {
- //   if (worldMap[i][j] === r) {
- //    worldMap[i][j] = Math.floor(Math.random() * 10);
- //   }
- //  }
- // }
- // console.log(worldMap);
- 
- socket.on('worldMapDataUpdated', function (data) {
- worldMap = data;
- });
  
 }
 
@@ -564,47 +551,60 @@ function draw() {
 }
 
 
-socket.on('player1XPositionUpdated', function (data) {
- var position1X = data;
- console.log(position1X);
+socket.on('player1XPositionUpdated', function (data1) {
+ var position1X = data1;
+ // console.log(position1X);
 });
 
-socket.on('player1YPositionUpdated', function (data) {
- var position1Y = data;
- console.log(position1Y);
-});
-
-
-socket.on('player2XPositionUpdated', function (data) {
- var position2X = data;
- console.log(position2X);
-});
-
-socket.on('player2YPositionUpdated', function (data) {
- var position2Y = data;
- console.log(position2Y);
+socket.on('player1YPositionUpdated', function (data2) {
+ var position1Y = data2;
+ // console.log(position1Y);
 });
 
 
-socket.on('player3XPositionUpdated', function (data) {
- var position3X = data;
- console.log(position3X);
+socket.on('player2XPositionUpdated', function (data3) {
+ var position2X = data3;
+ // console.log(position2X);
 });
 
-socket.on('player3YPositionUpdated', function (data) {
- var position3Y = data;
- console.log(position3Y);
+socket.on('player2YPositionUpdated', function (data4) {
+ var position2Y = data4;
+ // console.log(position2Y);
 });
 
 
-socket.on('player4XPositionUpdated', function (data) {
- var position4X = data;
- console.log(position4X);
+socket.on('player3XPositionUpdated', function (data5) {
+ var position3X = data5;
+ // console.log(position3X);
 });
 
-socket.on('player4YPositionUpdated', function (data) {
- var position4Y = data;
- console.log(position4Y);
+socket.on('player3YPositionUpdated', function (data6) {
+ var position3Y = data6;
+ // console.log(position3Y);
+});
+
+
+socket.on('player4XPositionUpdated', function (data7) {
+ var position4X = data7;
+ // console.log(position4X);
+});
+
+socket.on('player4YPositionUpdated', function (data8) {
+ var position4Y = data8;
+ // console.log(position4Y);
+});
+
+socket.on('worldMapDataUpdated', function (data9) {
+ var worldMapVar = {data9};
+ 
+ for (var i = 0; i < worldMap.length; i++) {
+  for (var j = 0; j < worldMap[0].length; j++) {
+   if (worldMap[i][j] === r) {
+    worldMap[i][j] = worldMapVar;
+   }
+  }
+ }
+ // console.log(worldMap);
 });
 
 // socket.on('test message', function (data) {
