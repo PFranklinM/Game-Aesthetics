@@ -495,6 +495,11 @@ function raycastSprites() {
         socket.emit('player1WasShot', { player1ShotBool: oneGotShot });
 
         shotCounter = 0;
+        
+        if(p1Health <= 0){
+         killsNum++;
+        }
+        
        }
       }
       
@@ -509,6 +514,11 @@ function raycastSprites() {
         socket.emit('player2WasShot', { player2ShotBool: twoGotShot });
 
         shotCounter = 0;
+        
+        if(p2Health <= 0){
+         killsNum++;
+        }
+        
        }
       }
       
@@ -523,6 +533,11 @@ function raycastSprites() {
         socket.emit('player3WasShot', { player3ShotBool: threeGotShot });
 
         shotCounter = 0;
+        
+        if(p3Health <= 0){
+         killsNum++;
+        }
+        
        }
       }
     }
@@ -589,6 +604,9 @@ function draw() {
  
  if(health <= 0){
   socket.emit('player4Health', { player4HealthData: health });
+  p4Health = 100;
+  health = 100;
+  pos.set(17, 15);
  }
  
 }

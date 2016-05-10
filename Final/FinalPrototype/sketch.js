@@ -516,6 +516,11 @@ function raycastSprites() {
         socket.emit('player2WasShot', { player2ShotBool: twoGotShot });
 
         shotCounter = 0;
+        
+        if(p2Health <= 0){
+         killsNum++;
+        }
+        
        }
       }
       
@@ -530,6 +535,11 @@ function raycastSprites() {
         socket.emit('player3WasShot', { player3ShotBool: threeGotShot });
 
         shotCounter = 0;
+        
+        if(p3Health <= 0){
+         killsNum++;
+        }
+        
        }
       }
       
@@ -544,6 +554,11 @@ function raycastSprites() {
         socket.emit('player4WasShot', { player4ShotBool: fourGotShot });
 
         shotCounter = 0;
+        
+        if(p4Health <= 0){
+         killsNum++;
+        }
+        
        }
       }
     }
@@ -616,6 +631,9 @@ function draw() {
  
  if(health <= 0){
   socket.emit('player1Health', { player1HealthData: health });
+  p1Health = 100;
+  health = 100;
+  pos.set(17, 12);
  }
  
 }
@@ -807,7 +825,7 @@ socket.on('player1LifeBar', function (data14) {
         var player1HealthData = data14[key];
         
         p1Health = player1HealthData[key];
-        // console.log(player1HealthData[key]);
+        console.log(player1HealthData[key]);
     }
  }
 });
