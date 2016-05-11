@@ -81,7 +81,6 @@ var lastTime;
 
 var gunCycleCompleted = false;
 
-var health;
 var oneGotShot;
 var twoGotShot;
 var threeGotShot;
@@ -91,14 +90,16 @@ var killsNum;
 var showDamage = false;
 var gotAKill = false;
 
+var health = 100;
+
 var p1Health = 100;
 var p2Health = 100;
 var p3Health = 100;
 var p4Health = 100;
 
 var socket;
-// var url = '149.31.200.6';
-var url = '192.168.0.5';
+// var url = '192.168.0.5';
+var url = '149.31.200.12';
 var port = 3000;
 socket = io.connect(url+':'+port);//create instance of socket io
 
@@ -134,7 +135,6 @@ function setup() {
  playerSpeed = 0.01;
  rotSpeed = 0.005;
  
- health = 100;
  oneGotShot = false;
  twoGotShot = false;
  threeGotShot = false;
