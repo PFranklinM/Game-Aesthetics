@@ -130,4 +130,28 @@ var worldMapVar = {};
         });
     });
 
+    socket.on('player1Score', function (data18) {
+        io.sockets.emit('player1Kills',{
+            player1KillsNum: data18
+        });
+    });
+
+    socket.on('player2Score', function (data19) {
+        io.sockets.emit('player2Kills',{
+            player2KillsNum: data19
+        });
+    });
+
+    socket.on('player3Score', function (data20) {
+        io.sockets.emit('player3Kills',{
+            player3KillsNum: data20
+        });
+    });
+
+    socket.on('player4Score', function (data21) {
+        io.sockets.emit('player4Kills',{
+            player4KillsNum: data21
+        });
+    });
+
 });

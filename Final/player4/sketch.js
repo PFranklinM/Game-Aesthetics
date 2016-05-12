@@ -85,7 +85,13 @@ var oneGotShot;
 var twoGotShot;
 var threeGotShot;
 var fourGotShot;
+
 var killsNum;
+
+var p1Kills = 0;
+var p2Kills = 0;
+var p3Kills = 0;
+var p4Kills = 0;
 
 var showDamage = false;
 var gotAKill = false;
@@ -572,12 +578,23 @@ function draw() {
  textSize(40);
  text("Health: " + health, width*0.05, 50);
  text("Kills: " + killsNum, width*0.8, 50);
- fill(0, 102, 153);
+ fill(255);
 
  if (keyIsDown(32)) {
   gunShot = true;
   
   // socket.emit('new message');
+ }
+ 
+ if(keyIsDown(16)){
+  
+ textSize(40);
+ text("Player1: " + p1Kills, width*0.01, 225);
+ text("Player2: " + p2Kills, width*0.01, 300);
+ text("Player3: " + p3Kills, width*0.01, 375);
+ text("Player4: " + p4Kills, width*0.01, 450);
+ fill(255);
+  
  }
 
  if (gunShot == true) {
@@ -609,6 +626,10 @@ function draw() {
   p4Health = 100;
   pos.set(17, 15);
  }
+ 
+ p4Kills = killsNum;
+ 
+ socket.emit('player4Score', { player4KillsNum: p4Kills });
  
 }
 
@@ -837,6 +858,54 @@ socket.on('player4LifeBar', function (data17) {
         
  //        p4Health = player4HealthData[key];
  //        // console.log(player4HealthData[key]);
+ //    }
+ // }
+});
+
+socket.on('player1Kills', function (data18) {
+ 
+  for(key in data18) {
+    if(data18.hasOwnProperty(key)) {
+        var player1KillsNum = data18[key];
+        
+        p1Kills = player1KillsNum[key];
+        // console.log(player1KillsNum[key]);
+    }
+ }
+});
+
+socket.on('player2Kills', function (data19) {
+ 
+  for(key in data19) {
+    if(data19.hasOwnProperty(key)) {
+        var player2KillsNum = data19[key];
+        
+        p2Kills = player2KillsNum[key];
+        // console.log(player2KillsNum[key]);
+    }
+ }
+});
+
+socket.on('player3Kills', function (data20) {
+ 
+  for(key in data20) {
+    if(data20.hasOwnProperty(key)) {
+        var player3KillsNum = data20[key];
+        
+        p3Kills = player3KillsNum[key];
+        // console.log(player3KillsNum[key]);
+    }
+ }
+});
+
+socket.on('player4Kills', function (data21) {
+ 
+ //  for(key in data21) {
+ //    if(data21.hasOwnProperty(key)) {
+ //        var player4KillsNum = data21[key];
+        
+ //        p4Kills = player4KillsNum[key];
+ //        // console.log(player4KillsNum[key]);
  //    }
  // }
 });
