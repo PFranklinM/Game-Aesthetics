@@ -98,8 +98,8 @@ var p3Health = 100;
 var p4Health = 100;
 
 var socket;
-// var url = '192.168.0.5';
-var url = '149.31.200.12';
+var url = '192.168.0.5';
+// var url = '149.31.200.12';
 var port = 3000;
 socket = io.connect(url+':'+port);//create instance of socket io
 
@@ -602,11 +602,13 @@ function draw() {
  
  showDamage = false;
  
- socket.emit('player4Health', { player4HealthData: health });
+ p4Health = health;
+ 
+ socket.emit('player4Health', { player4HealthData: p4Health });
  
  if(health <= 0){
-  p4Health = 100;
   health = 100;
+  p4Health = 100;
   pos.set(17, 15);
  }
  
@@ -831,14 +833,14 @@ socket.on('player3LifeBar', function (data16) {
 
 socket.on('player4LifeBar', function (data17) {
  
-  for(key in data17) {
-    if(data17.hasOwnProperty(key)) {
-        var player4HealthData = data17[key];
+ //  for(key in data17) {
+ //    if(data17.hasOwnProperty(key)) {
+ //        var player4HealthData = data17[key];
         
-        p4Health = player4HealthData[key];
-        // console.log(player4HealthData[key]);
-    }
- }
+ //        p4Health = player4HealthData[key];
+ //        // console.log(player4HealthData[key]);
+ //    }
+ // }
 });
 
 // socket.on('test message', function (data) {

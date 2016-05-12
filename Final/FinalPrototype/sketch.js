@@ -1,4 +1,5 @@
 //This is player 1
+// https://github.com/PFranklinM/Game-Aesthetics
 
 var r;
 
@@ -98,8 +99,8 @@ var p3Health = 100;
 var p4Health = 100;
 
 var socket;
-// var url = '192.168.0.5';
-var url = '149.31.200.12';
+var url = '192.168.0.5';
+// var url = '149.31.200.12';
 var port = 3000;
 socket = io.connect(url+':'+port);//create instance of socket io
 
@@ -629,11 +630,13 @@ function draw() {
  
  showDamage = false;
  
- socket.emit('player1Health', { player1HealthData: health });
+ p1Health = health;
+ 
+ socket.emit('player1Health', { player1HealthData: p1Health });
  
  if(health <= 0){
-  p1Health = 100;
   health = 100;
+  p1Health = 100;
   pos.set(17, 12);
  }
  
@@ -823,14 +826,14 @@ socket.on('player4Hurt', function (data13) {
 
 socket.on('player1LifeBar', function (data14) {
  
-  for(key in data14) {
-    if(data14.hasOwnProperty(key)) {
-        var player1HealthData = data14[key];
+ //  for(key in data14) {
+ //    if(data14.hasOwnProperty(key)) {
+ //        var player1HealthData = data14[key];
         
-        p1Health = player1HealthData[key];
-        // console.log(player1HealthData[key]);
-    }
- }
+ //        p1Health = player1HealthData[key];
+ //        // console.log(player1HealthData[key]);
+ //    }
+ // }
 });
 
 socket.on('player2LifeBar', function (data15) {
