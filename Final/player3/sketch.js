@@ -128,7 +128,7 @@ function preload() {
 function setup() {
  createCanvas(800, 600);
 
- pos = createVector(20, 12);
+ pos = createVector(33, 3);
  dir = createVector(0, 1);
  plane = createVector(1, 0);
  rot = 0;
@@ -143,15 +143,13 @@ function setup() {
 
  sprites = [{
   //player1
-  pos: createVector(17, 12)
- 
-  
+  pos: createVector(3, 3)
  }, {
   //player2
-  pos: createVector(20, 15)
+  pos: createVector(3, 23)
  }, {
   //player4
-  pos: createVector(17, 15)
+  pos: createVector(33, 23)
  }];
 
  spritesDir = [{
@@ -496,7 +494,7 @@ function raycastSprites() {
 
         shotCounter = 0;
         
-        if(p1Health <= 0){
+        if(p1Health === 10){
          killsNum++;
         }
         
@@ -515,7 +513,7 @@ function raycastSprites() {
 
         shotCounter = 0;
         
-        if(p2Health <= 0){
+        if(p2Health === 10){
          killsNum++;
         }
         
@@ -534,7 +532,7 @@ function raycastSprites() {
 
         shotCounter = 0;
         
-        if(p4Health <= 0){
+        if(p4Health === 10){
          killsNum++;
         }
         
