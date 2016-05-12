@@ -105,7 +105,7 @@ var p3Health = 100;
 var p4Health = 100;
 
 var socket;
-var url = '192.168.0.5';
+var url = '149.31.200.228';
 // var url = '149.31.200.12';
 var port = 3000;
 socket = io.connect(url+':'+port);//create instance of socket io
