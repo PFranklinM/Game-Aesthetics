@@ -624,12 +624,40 @@ function draw() {
  if(health <= 0){
   health = 100;
   p2Health = 100;
-  pos.set(20, 15);
+  pos.set(3, 23);
  }
  
  p2Kills = killsNum;
  
  socket.emit('player2Score', { player2KillsNum: p2Kills });
+ 
+ if(p1Kills === 10){
+  playerSpeed = 0;
+  textSize(60);
+  text("Player 1 Wins!", width*0.30, height*0.5);
+  fill(255);
+ }
+ 
+ if(p2Kills === 10){
+  playerSpeed = 0;
+  textSize(60);
+  text("Player 2 Wins!", width*0.30, height*0.5);
+  fill(255);
+ }
+ 
+ if(p3Kills === 10){
+  playerSpeed = 0;
+  textSize(60);
+  text("Player 3 Wins!", width*0.30, height*0.5);
+  fill(255);
+ }
+ 
+ if(p4Kills === 10){
+  playerSpeed = 0;
+  textSize(60);
+  text("Player 4 Wins!", width*0.30, height*0.5);
+  fill(255);
+ }
  
 }
 
